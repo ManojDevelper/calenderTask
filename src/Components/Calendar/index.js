@@ -24,32 +24,32 @@ const Calendar = ({ showDetailsHandle }) => {
         const dateFormat = "MMM yyyy";
         return (
             <div className="head_wrapper">
-            <div className="header row flex-middle">
-                <div className="col col-start">
-                    <div className="icon" onClick={() => changeWeekHandle({
-                        btnType: "prev",
-                        currentMonth,
-                        setCurrentMonth
-                    })}>
-                        Prev week
+                <div className="header row flex-middle">
+                    <div className="col col-start">
+                        <div className="icon" onClick={() => changeWeekHandle({
+                            btnType: "prev",
+                            currentMonth,
+                            setCurrentMonth
+                        })}>
+                            Prev week
+                        </div>
                     </div>
-                </div>
-                <div className="col col-center">
-                    <span>{format(currentMonth, dateFormat)}</span>
-                </div>
-                <div className="col col-end">
-                    <div className="icon" onClick={() => changeWeekHandle({
-                        btnType: "next",
-                        currentMonth,
-                        setCurrentMonth
-                    })}>
-                        Next week
+                    <div className="col col-center">
+                        <span>{format(currentMonth, dateFormat)}</span>
                     </div>
-                </div>
+                    <div className="col col-end">
+                        <div className="icon" onClick={() => changeWeekHandle({
+                            btnType: "next",
+                            currentMonth,
+                            setCurrentMonth
+                        })}>
+                            Next week
+                        </div>
+                    </div>
                 </div>
                 <div className="DropDown_wrapper">
                     <select className="dropdown">
-                    <option>[UTC 0]</option>
+                        <option>[UTC 0]</option>
                         <option>[UTC 5]</option>
                     </select>
                 </div>
@@ -70,14 +70,15 @@ const Calendar = ({ showDetailsHandle }) => {
             for (let i = 0; i < 7; i++) {
                 formattedDate = format(day, dateFormat);
                 const cloneDay = day;
+                const getCurrentDay = setDateFun(day);
                 days.push(
                     <div className="days_check_wrapper">
                         <div
                             className={`days_row col cell ${isSameDay(day, new Date())
-                                    ? "today"
-                                    : isSameDay(day, selectedDate)
-                                        ? "selected"
-                                        : ""
+                                ? "today"
+                                : isSameDay(day, selectedDate)
+                                    ? "selected"
+                                    : ""
                                 }`}
                             key={day}
                             onClick={() => {
@@ -88,8 +89,8 @@ const Calendar = ({ showDetailsHandle }) => {
                             <span className="number">
                                 {" "}
                                 {format(addDays(startDate, i), "EEE")}
-                                <br/>
-                                <span className="cell_date">{setDateFun(day)}</span>
+                                <br />
+                                <span className="cell_date">{getCurrentDay}</span>
                             </span>
                             <span className="bg">{formattedDate}</span>
                         </div>
@@ -106,7 +107,7 @@ const Calendar = ({ showDetailsHandle }) => {
                                                     createJSONFUN({
                                                         name: format(addDays(startDate, i), "EEE"),
                                                         time: item?.time,
-                                                        date: setDateFun(day),
+                                                        date: getCurrentDay,
                                                     })
                                                 }
                                             />
